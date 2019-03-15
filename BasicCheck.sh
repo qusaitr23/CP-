@@ -5,12 +5,12 @@ _Program=$2
 cd $1
 	
 if [ -f "Makefile" ]; then
- make &> /dev/null , 
+ make &> /dev/null 
  
 _Comp=$?
 
- if [ $_Comp -gt 0 ]; then
-  _Ans0="Compilation Pass"
+ if [ $_Comp gt 0 ]; then
+  _Ans0="Pass"
 	
   valgrind --leak-check=full --error-exitcode=1 ./$_Program &> /dev/null 
 	
@@ -20,14 +20,14 @@ _Comp=$?
 	
   _Helgrind_RES=$?
 
-   if [ $_Valgrind_RES -gt 0 ]; then
+   if [ $_Valgrind_RES gt 0 ]; then
     
 	_Ans1="Pass"
 else
 	 _Ans1="Failed"
    fi
 
-   if [ $_Helgrind_RES -gt 0 ]; then
+   if [ $_Helgrind_RES gt 0 ]; then
 	
     _Ans2="Pass"	
 
@@ -37,16 +37,18 @@ else
 
   _S=$((4*$_Compilation+2*$_Valgrind_RES+1*$_Helgrind_RES))
 	
-  	echo "BasicCheck.sh <$_Path> <$_Program> Compilation   Memory leaks   Thread Race  $_Ans0   ,   $_Ans1  , $_Ans2"         
+  	echo "BasicCheck.sh <$_Path> <$_Program> Compilation   Memory leaks   Thread Race 
+	                                            $_Ans0   ,   $_Ans1  ,      $_Ans2 "         
      
   exit $_S
 
  else 
 	echo "The Compilation Failed"
 	
- 	 _Compilation="Failed"
+ 	 _Ans0="Failed"
 	
-	echo "BasicCheck.sh <$_Path> <$_Program> Compilation   Memory leaks   Thread Race  $_Ans0   ,   $_Ans1  , $_Ans2"
+	echo "BasicCheck.sh <$_Path> <$_Program> Compilation   Memory leaks   Thread Race 
+	                                           $_Ans0   ,   $_Ans1  ,       $_Ans2"
    
   exit 7
 	
