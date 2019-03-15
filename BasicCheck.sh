@@ -10,6 +10,7 @@ if [ -f "Makefile" ]; then
 _Comp=$?
 
  if [ $_Comp gt 0 ]; then
+	
   _Ans0="Pass"
 	
   valgrind --leak-check=full --error-exitcode=1 ./$_Program &> /dev/null 
@@ -35,7 +36,7 @@ else
 	_Ans2="Failed"
    fi
 
-  _S=$((4*$_Compilation+2*$_Valgrind_RES+1*$_Helgrind_RES))
+  _S=$((4*$_Comp+2*$_Valgrind_RES+1*$_Helgrind_RES))
 	
   	echo "BasicCheck.sh <$_Path> <$_Program> Compilation   Memory leaks   Thread Race 
 	                                            $_Ans0   ,   $_Ans1  ,      $_Ans2 "         
@@ -48,12 +49,12 @@ else
  	 _Ans0="Failed"
 	
 	echo "BasicCheck.sh <$_Path> <$_Program> Compilation   Memory leaks   Thread Race 
-	                                           $_Ans0   ,   $_Ans1  ,       $_Ans2"
+	                                           $_Ans0   ,   $_Ans1  ,       $_Ans2 "
    
   exit 7
 	
  fi
 
 else 
-	echo "There's no such File called MakeFile"
+	echo "There's no such File called Makefile"
 fi
